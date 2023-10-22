@@ -10,10 +10,10 @@ export default function User({ fullName, status, ID }) {
     <>
     {status == 'Członek' ? (
         <>
-            <Button size='tiny' onPress={onPress}  style={{marginRight: 5}}>
+            <Button size='tiny' onPress={onPress}  style={{marginRight: 5}} appearance='ghost'>
                 MODERATOR
             </Button>
-            <Button size='tiny' onPress={onPress} status='danger'>
+            <Button size='tiny' onPress={onPress} status='danger' appearance='ghost'>
                 USUŃ
             </Button>
         </>

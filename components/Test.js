@@ -8,7 +8,7 @@ export default function Test({ lesson, desc, ID }) {
 
   const InstallButton = ({ onPress }) => (
         <>
-            <Button size='tiny' onPress={onPress} status='danger'>
+            <Button size='tiny' onPress={onPress} status='danger' appearance='ghost'>
                 USUŃ
             </Button>
         </>

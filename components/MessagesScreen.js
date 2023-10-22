@@ -9,9 +9,13 @@ import CreateGroup from './CreateGroup';
 export default function MessagesScreen() {
   return (
     <Layout>
-      <CreateGroup />
-      <Divider />
-      <Class title={"Klasa 3TP"} lastMessage={"User: Hello world"} ID={1232131312} />
+      <Text category='h2' style={{marginLeft: 20, marginTop: 50}}>Witaj, Krystian 🔥</Text>
+      <Text appearance='hint' style={{marginLeft: 20}}>Jesteś przewodniczącym</Text>
+       <CreateGroup />
+       <Divider />
+      <Class title={"Klasa 3TP"} lastMessage={"User: Hello world"} ID={1232131312}/>
+    
+     
     </Layout>
   );
 }

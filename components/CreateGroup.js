@@ -37,10 +37,10 @@ export default function CreateGroup() {
             onFocus={handleInputFocus}
             onBlur={handleInputBlur}
           />
-          <Button style={{ marginTop: 30 }}>
+          <Button style={{ marginTop: 30 }} >
             Zapisz
           </Button>
-          <Button appearance='outline' style={{ marginTop: 5 }} onPress={() => {
+          <Button appearance='ghost' status='basic' style={{ marginTop: 5 }} onPress={() => {
             setVisible(false)
             handleInputBlur()
             }}>
@@ -50,7 +50,7 @@ export default function CreateGroup() {
       </Modal>
 
       <View style={{ margin: 20, fontSize: 10 }}>
-        <Button appearance='outline' onPress={() => {
+        <Button appearance='outline' status='info' onPress={() => {
         setVisible(true) 
         handleInputBlur()
         }}>Utwórz grupę</Button>

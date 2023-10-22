@@ -22,7 +22,7 @@ export default function Class({ title, lastMessage, ID }) {
   };
 
   const InstallButton = ({ onPress }) => (
-    <Button size='tiny' onPress={onPress}>
+    <Button size='tiny' onPress={onPress} appearance='ghost'>
       USTAWIENIA
     </Button>
   );
@@ -56,7 +56,7 @@ export default function Class({ title, lastMessage, ID }) {
             editable={false}
             label={evaProps => <Text {...evaProps}>Zaproszenie</Text>}
           />
-          <Button style={{ marginTop: 10 }} onPress={handleCopyInvite}>
+          <Button style={{ marginTop: 10 }} onPress={handleCopyInvite} appearance='ghost'>
             Skopiuj Zaproszenie
           </Button>
           {copy ? (<Text appearance='hint' style={{marginTop: 5}}>Skopiowano zaproszenie!</Text>) : null}
@@ -75,7 +75,7 @@ export default function Class({ title, lastMessage, ID }) {
           <Button style={{ marginTop: 30 }} onPress={handleSaveGroupName}>
             Zapisz
           </Button>
-          <Button appearance='outline' style={{ marginTop: 5 }} onPress={() => setVisible(false)}>
+          <Button appearance='ghost' status='basic' style={{ marginTop: 5 }} onPress={() => setVisible(false)}>
             Anuluj
           </Button>
         </Card>

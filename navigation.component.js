@@ -24,10 +24,10 @@ const BottomTabBar = ({ navigation, state }) => (
 
 const TabNavigator = () => (
   <Navigator tabBar={props => <BottomTabBar {...props} />}>
-    <Screen name='Wiadomości' component={MessagesScreen} />
-    <Screen name='Zadania' component={HomesWorksScreen}/>
-    <Screen name='Testy' component={TestsScreen}/>
-    <Screen name='Średnia' component={GradesScreen}/>
+    <Screen name='Wiadomości' component={MessagesScreen} options={{headerShown: false}}   />
+    <Screen name='Zadania' component={HomesWorksScreen} options={{headerShown: false}}/>
+    <Screen name='Testy' component={TestsScreen} options={{headerShown: false}}/>
+    <Screen name='Średnia' component={GradesScreen} options={{headerShown: false}}/>
   </Navigator>
 );
 
