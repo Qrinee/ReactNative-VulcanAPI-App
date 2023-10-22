@@ -5,7 +5,7 @@ import CreateHomeWork from './CreateHomeWork';
 
 export default function HomeWorksScreen() {
   return (
-    <Layout>
+    <Layout style={{backgroundColor: '#202129', flex: 1}}>
         <Text category='h2' style={{marginLeft: 20, marginTop: 50}}>Zadania domowe 📚</Text>
       <Text appearance='hint' style={{marginLeft: 20}}>Wszystko niezapisane tutaj</Text>
         <CreateHomeWork />

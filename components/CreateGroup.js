@@ -49,7 +49,7 @@ export default function CreateGroup() {
         </Card>
       </Modal>
 
-      <View style={{ margin: 20, fontSize: 10 }}>
+      <View style={{ margin: 20, fontSize: 10, }}>
         <Button appearance='outline' status='info' onPress={() => {
         setVisible(true) 
         handleInputBlur()

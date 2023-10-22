@@ -3,7 +3,7 @@ import {Layout, Text } from '@ui-kitten/components';
 
 export default function GradesScreen() {
   return (
-    <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+    <Layout style={{backgroundColor: '#202129', flex: 1}}>
         <Text category='h1'>Średnia</Text>
     </Layout>
   )
