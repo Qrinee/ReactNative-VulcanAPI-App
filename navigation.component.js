@@ -10,11 +10,6 @@ import TestsScreen from './components/TestsScreen';
 const { Navigator, Screen } = createBottomTabNavigator();
 
 
-const OrdersScreen = () => (
-  <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-    <Text category='h1'>ORDERS</Text>
-  </Layout>
-);
 
 const BottomTabBar = ({ navigation, state }) => (
   <BottomNavigation
@@ -22,8 +17,8 @@ const BottomTabBar = ({ navigation, state }) => (
     onSelect={index => navigation.navigate(state.routeNames[index])}>
     <BottomNavigationTab title='Wiadomości'/>
     <BottomNavigationTab title='Zadania'/>
-    <BottomNavigationTab title='Średnia'/>
     <BottomNavigationTab title='Testy'/>
+    <BottomNavigationTab title='Średnia'/>
   </BottomNavigation>
 );
 
@@ -31,8 +26,8 @@ const TabNavigator = () => (
   <Navigator tabBar={props => <BottomTabBar {...props} />}>
     <Screen name='Wiadomości' component={MessagesScreen} />
     <Screen name='Zadania' component={HomesWorksScreen}/>
-    <Screen name='Średnia' component={GradesScreen}/>
     <Screen name='Testy' component={TestsScreen}/>
+    <Screen name='Średnia' component={GradesScreen}/>
   </Navigator>
 );
 

@@ -1,11 +1,13 @@
-import { Layout, Text } from '@ui-kitten/components';
+import { Layout, Text, Button } from '@ui-kitten/components';
 import React from 'react'
+import Test from './Test';
 
 
 export default function TestsScreen() {
   return (
-    <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text category='h1'>Tests</Text>
+    <Layout>
+        <Button appearance='outline' style={{margin: 20}}>Dodaj test</Button>
+        <Test lesson={"Matematyka | 27.01.2023"} desc={"Trygonometria"} />
     </Layout>
   )
 }
