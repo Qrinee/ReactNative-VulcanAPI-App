@@ -71,15 +71,27 @@ export default function CreateTest() {
         
           <Text category='h1' style={{ marginTop: 10, marginBottom: 10}}>Dodaj test</Text>
           <Text appearance='hint' category='label' style={{marginBottom: 5}} >Wybierz date</Text>
-          <Calendar date={date2} onDayPress={(e) => setDate(e)} />
+          <Calendar style={{backgroundColor: '#1b2036', color: 'white'}} date={date2} onDayPress={(e) => setDate(e)} />
           <Text category='h5' style={{margin: 10}}>{date.dateString}</Text>
           <Text appearance='hint' category='label' style={{marginBottom: 5}} >Przedmiot</Text>
 
 
           <SelectList 
           placeholder='Wybierz przedmiot...'
-          boxStyles={{borderColor: '#d4d4d4', backgroundColor: '#fafafa'}}
-          inputStyles={{color: 'gray'}}
+          boxStyles={{
+            borderColor: '#11192e',
+            backgroundColor: '#1b2036',
+            color: 'white', // Ustaw kolor tekstu w polu wyboru na biały
+          }}
+          dropdownTextStyles={{
+            color: '#959fb7'
+          }}
+          inputStyles={{
+            color: 'white'
+          }}
+          disabledItemStyles={{
+            color: '#959fb7'
+          }}
         setSelected={(val) => setSelected(val)} 
         data={data} 
         save="value"
@@ -88,8 +100,20 @@ export default function CreateTest() {
         <Text appearance='hint' category='label' style={{marginBottom: 5, marginTop: 10}} >Typ</Text>
           <SelectList 
           placeholder='Wybierz typ testu...'
-          boxStyles={{borderColor: '#d4d4d4', backgroundColor: '#fafafa'}}
-          inputStyles={{color: 'gray'}}
+          boxStyles={{
+            borderColor: '#11192e',
+            backgroundColor: '#1b2036',
+            color: 'white', // Ustaw kolor tekstu w polu wyboru na biały
+          }}
+          dropdownTextStyles={{
+            color: '#959fb7'
+          }}
+          inputStyles={{
+            color: 'white'
+          }}
+          disabledItemStyles={{
+            color: '#959fb7'
+          }}
         setSelected={(val) => setSelected(val)} 
         data={type} 
         save="value"

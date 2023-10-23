@@ -59,13 +59,25 @@ export default function CreateHomeWork() {
           <Text category='h1' style={{ marginTop: 10, marginBottom: 10}}>Dodaj zadanie</Text>
           <Text appearance='hint' category='label' style={{marginBottom: 5}} >Przedmiot</Text>
           <SelectList 
-          placeholder='Wybierz przedmiot...'
-          boxStyles={{borderColor: '#d4d4d4', backgroundColor: '#fafafa'}}
-          inputStyles={{color: 'gray'}}
-        setSelected={(val) => setSelected(val)} 
-        data={data} 
-        save="value"
-    />
+              placeholder='Wybierz przedmiot...'
+              boxStyles={{
+                borderColor: '#11192e',
+                backgroundColor: '#1b2036',
+                color: 'white', // Ustaw kolor tekstu w polu wyboru na biały
+              }}
+              dropdownTextStyles={{
+                color: '#959fb7'
+              }}
+              inputStyles={{
+                color: 'white'
+              }}
+              disabledItemStyles={{
+                color: '#959fb7'
+              }}
+              setSelected={(val) => setSelected(val)} 
+              data={data} 
+              save="value"
+          />
           <Input
             label="Treść zadania"
             style={{ marginTop: 10 }}
