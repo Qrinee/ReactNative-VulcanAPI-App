@@ -15,7 +15,7 @@ const BottomTabBar = ({ navigation, state }) => (
   <BottomNavigation
     selectedIndex={state.index}
     onSelect={index => navigation.navigate(state.routeNames[index])}>
-    <BottomNavigationTab title='Wiadomości'/>
+    <BottomNavigationTab title='Start'/>
     <BottomNavigationTab title='Zadania'/>
     <BottomNavigationTab title='Testy'/>
     <BottomNavigationTab title='Średnia'/>
@@ -24,7 +24,7 @@ const BottomTabBar = ({ navigation, state }) => (
 
 const TabNavigator = () => (
   <Navigator tabBar={props => <BottomTabBar {...props} />}>
-    <Screen name='Wiadomości' component={MessagesScreen} options={{headerShown: false}}   />
+    <Screen name='Start' component={MessagesScreen} options={{headerShown: false}}   />
     <Screen name='Zadania' component={HomesWorksScreen} options={{headerShown: false}}/>
     <Screen name='Testy' component={TestsScreen} options={{headerShown: false}}/>
     <Screen name='Średnia' component={GradesScreen} options={{headerShown: false}}/>

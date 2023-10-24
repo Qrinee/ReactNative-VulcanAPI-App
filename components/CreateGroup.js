@@ -53,7 +53,7 @@ export default function CreateGroup() {
         <Button appearance='outline' status='info' onPress={() => {
         setVisible(true) 
         handleInputBlur()
-        }}>Utwórz grupę</Button>
+        }}>+ Utwórz grupę</Button>
       </View>
     </>
   );
