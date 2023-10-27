@@ -1,17 +1,21 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, Button, Image } from 'react-native';
-import { List, ListItem } from '@ui-kitten/components'; // Importujemy komponent ListItem
+import React, { useState, useEffect } from 'react';
+import { View, Text, Image } from 'react-native';
+import { List, ListItem } from '@ui-kitten/components';
 
-const YouTubeSearch = () => {
-  const [searchTerm, setSearchTerm] = useState('');
+const YouTubeSearch = ({ searchQuery }) => {
   const [searchResults, setSearchResults] = useState([]);
+  const apiKey = 'AIzaSyChmW8PqNhAjbjVlTEGnUojRFgiKZW5a4w';
+
+  useEffect(() => {
+    if (searchQuery) {
+      handleSearch();
+    }
+  }, [searchQuery]);
 
   const handleSearch = async () => {
-    const apiKey = 'AIzaSyChmW8PqNhAjbjVlTEGnUojRFgiKZW5a4w'; // Zastąp swoim kluczem API
-
     try {
       const response = await fetch(
-        `https://www.googleapis.com/youtube/v3/search?key=${apiKey}&q=${searchTerm}&part=snippet&type=video`
+        `https://www.googleapis.com/youtube/v3/search?key=${apiKey}&q=${searchQuery}&part=snippet&type=video`
       );
 
       const data = await response.json();
@@ -20,13 +24,13 @@ const YouTubeSearch = () => {
         setSearchResults(data.items);
       }
     } catch (error) {
-      console.error('Błąd podczas wyszukiwania:', error);
+      console.error('Error during search:', error);
     }
   };
 
   return (
     <View>
-      <List 
+      <List
         data={searchResults}
         renderItem={({ item }) => (
           <ListItem

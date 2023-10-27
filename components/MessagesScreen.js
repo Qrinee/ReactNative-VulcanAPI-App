@@ -8,6 +8,32 @@ import Notice from './Notice';
 
 
 export default function MessagesScreen() {
+  const data = [
+    {
+      key: 0,
+      title: 'Zbiórka na kwiaty',
+      desc: 'Zbiórka na kwiaty 10zł dla suszyło xd. Przynieście na jutro najlepiej jak nie to wpierdol',
+      date: '23.10.2023'
+    },
+    {
+      key: 1,
+      title: 'Mikołajki klasowe',
+      desc: 'Kto bierze udział niech napisze mi na messengerze.',
+      date: '23.10.2023'
+    },
+    {
+      key: 2,
+      title: 'Zbiórka na pieski',
+      desc: 'Zbiórka na schronisko 20zł ale można dać mniej jeżeli ktoś nie posiada',
+      date: '23.10.2023'
+    },
+    {
+      key: 3,
+      title: 'Jutro skrócone lekcje',
+      desc: '24.10.2023 będą skrócone lekcje. Plan lekcji macie na stronie szkoły',
+      date: '23.10.2023'
+    },  
+  ]
   return (
     <Layout style={{backgroundColor: '#202129', flex: 1}}>
       <ScrollView>
@@ -21,9 +47,9 @@ export default function MessagesScreen() {
       <View style={{ margin: 20, fontSize: 10, }}>
         <Button appearance='outline' status='info' >+ Dodaj ogłoszenie</Button>
       </View>
-    <Notice title={"Zbiórka na kwiaty"} desc={"Zbiórka na kwiaty 10zł dla suszyło xd. Przynieście na jutro najlepiej jak nie to wpierdol"} date={"23.10.2023"}/>
-    <Notice title={"Zbiórka na kwiaty"} desc={"Zbiórka na kwiaty 10zł dla suszyło xd. Przynieście na jutro najlepiej jak nie to wpierdol"} date={"23.10.2023"}/>
-    <Notice title={"Zbiórka na kwiaty"} desc={"Zbiórka na kwiaty 10zł dla suszyło xd. Przynieście na jutro najlepiej jak nie to wpierdol"} date={"23.10.2023"}/>
+      {
+        data.map(item => <Notice key={item.key} title={item.title} desc={item.desc} date={item.date}  />)
+      }
     </ScrollView>
     </Layout>
   );

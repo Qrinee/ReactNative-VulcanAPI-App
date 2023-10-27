@@ -7,6 +7,39 @@ import User from './User';
 import { ScrollView } from 'react-native';
 
 export default function Class({ title, lastMessage, ID }) {
+
+  const data = [
+    {
+      key: 0,
+      fullName: 'Krystian Niemczyk',
+      status: 'Członek',
+    },
+    {
+      key: 1,
+      fullName: 'Wojciech Sikora',
+      status: 'Administrator',
+    },
+    {
+      key: 2,
+      fullName: 'Jakub Zych',
+      status: 'Członek',
+    },
+    {
+      key: 3,
+      fullName: 'Marek Sobuś',
+      status: 'Członek',
+    },
+    {
+      key: 4,
+      fullName: 'Jakub Ciołek',
+      status: 'Członek',
+    },
+    {
+      key: 5,
+      fullName: 'Marc Owens',
+      status: 'Członek',
+    },
+  ]
   const [visible, setVisible] = useState(false);
   const [groupName, setGroupName] = useState('');
   const [copy, setCopy] = useState(false)
@@ -61,16 +94,9 @@ export default function Class({ title, lastMessage, ID }) {
           </Button>
           {copy ? (<Text appearance='hint' style={{marginTop: 5}}>Skopiowano zaproszenie!</Text>) : null}
           <Text category='h4' style={{marginTop: 10}}>Członkowie</Text>
-         
-            <User fullName={"Krystian Niemczyk"} status={"Członek"} ID={123123} />
-            <User fullName={"Marc Owens"} status={"Członek"} ID={123123} />
-            <User fullName={"Jacob Ciołek"} status={"Moderatora"} ID={123123} />
-            <User fullName={"Krystian Niemczyk"} status={"Członek"} ID={123123} />
-            <User fullName={"Krystian Niemczyk"} status={"Członek"} ID={123123} />
-            <User fullName={"Krystian Niemczyk"} status={"Członek"} ID={123123} />
-            <User fullName={"Krystian Niemczyk"} status={"Członek"} ID={123123} />
-            <User fullName={"Krystian Niemczyk"} status={"Członek"} ID={123123} />
-         
+
+          {data.map(e => <User ID={e.key} key={e.key} fullName={e.fullName} status={e.status} />)}
+
           <Divider />
           <Button style={{ marginTop: 30 }} onPress={handleSaveGroupName}>
             Zapisz
