@@ -7,15 +7,8 @@ export default function CreateGroup() {
   const [visible, setVisible] = useState(false);
   const [modalPosition, setModalPosition] = useState(0);
 
-  const handleInputFocus = () => {
-    // Move the modal up by 100 pixels when the input gains focus
-    setModalPosition(-100);
-  };
-
-  const handleInputBlur = () => {
-    // Reset the modal position to 0 when the input loses focus
-    setModalPosition(0);
-  };
+  const handleInputFocus = () => setModalPosition(-100);
+  const handleInputBlur = () => setModalPosition(0);
 
   return (
     <>

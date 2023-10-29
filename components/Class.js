@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Text, Avatar, Button, ListItem, Card, Input, Divider } from '@ui-kitten/components';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 import { Modal } from 'react-native';
 import * as ClipBoard from 'expo-clipboard'
 import User from './User';
 import { ScrollView } from 'react-native';
 
-export default function Class({ title, lastMessage, ID }) {
+export default function Class({ title, lastMessage, ID, navigation }) {
 
   const data = [
     {
@@ -43,6 +43,11 @@ export default function Class({ title, lastMessage, ID }) {
   const [visible, setVisible] = useState(false);
   const [groupName, setGroupName] = useState('');
   const [copy, setCopy] = useState(false)
+
+  const handleRedirectToMessages = () => {
+    navigation.navigate('Wiadomości');
+  };
+
   const handleSaveGroupName = () => {
     setVisible(false);
   };
@@ -67,12 +72,12 @@ export default function Class({ title, lastMessage, ID }) {
       source={require('../assets/group.png')}
     />
   );
-
   return (
     <>
      
       <Modal visible={visible} backdropStyle={styles.backdrop} onBackdropPress={() => setVisible(false)}>
       <ScrollView>
+
         <Card disabled={true}>
           <Text category='h1' style={{ marginTop: 10 }}>Ustawienia</Text>
           <Input
@@ -112,6 +117,7 @@ export default function Class({ title, lastMessage, ID }) {
         title={title}
         description={lastMessage}
         accessoryLeft={ItemImage}
+        onPress={handleRedirectToMessages}
         accessoryRight={<InstallButton onPress={() => setVisible(true)} />}
       />
 

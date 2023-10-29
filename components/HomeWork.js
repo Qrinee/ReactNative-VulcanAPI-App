@@ -4,7 +4,7 @@ import { StyleSheet } from 'react-native';
 import { Modal } from 'react-native';
 import * as ClipBoard from 'expo-clipboard'
 
-export default function HomeWork({ lesson, desc, ID }) {
+export default function HomeWork({ lesson, desc, ID, date }) {
 
   const InstallButton = ({ onPress }) => (
         <>
@@ -25,10 +25,11 @@ export default function HomeWork({ lesson, desc, ID }) {
   return (
     <>
       <ListItem
-        title={lesson}
+        title={lesson + " | " + date}
         description={desc}
         accessoryLeft={ItemImage}
         accessoryRight={<InstallButton  />}
+        style={{marginTop: 5}}
       />
     </>
   );

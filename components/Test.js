@@ -4,7 +4,7 @@ import { StyleSheet } from 'react-native';
 import { Modal } from 'react-native';
 import * as ClipBoard from 'expo-clipboard'
 
-export default function Test({ lesson, desc, ID, date }) {
+export default function Test({ lesson, desc, date }) {
 
   const InstallButton = ({ onPress }) => (
         <>

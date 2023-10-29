@@ -81,7 +81,7 @@ export default function CreateTest() {
           boxStyles={{
             borderColor: '#11192e',
             backgroundColor: '#1b2036',
-            color: 'white', // Ustaw kolor tekstu w polu wyboru na biały
+            color: 'white', 
           }}
           dropdownTextStyles={{
             color: '#959fb7'
@@ -103,7 +103,7 @@ export default function CreateTest() {
           boxStyles={{
             borderColor: '#11192e',
             backgroundColor: '#1b2036',
-            color: 'white', // Ustaw kolor tekstu w polu wyboru na biały
+            color: 'white',
           }}
           dropdownTextStyles={{
             color: '#959fb7'

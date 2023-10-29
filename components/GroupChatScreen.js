@@ -5,24 +5,24 @@ import { Text, Input, Button, Avatar, List, ListItem } from '@ui-kitten/componen
 const data = [
   {
     id: '1',
-    title: 'John Doe',
-    description: 'Hey guys, what\'s up?',
+    title: 'Artur N.',
+    description: 'Ok',
     time: '10:30 AM',
-    avatar: require('./assets/avatar1.png'),
+    avatar: require('../assets/avatar1.png'),
   },
   {
     id: '2',
-    title: 'Jane Smith',
-    description: 'Not much, just chilling.',
+    title: 'Wojtek K.',
+    description: 'Już dodałem',
     time: '10:35 AM',
-    avatar: require('./assets/avatar2.png'),
+    avatar: require('../assets/avatar2.png'),
   },
   {
     id: '3',
-    title: 'Bob Johnson',
-    description: 'Anyone want to grab lunch?',
+    title: 'Adam L.',
+    description: 'Dodaj wojtek zadanie z matmy',
     time: '11:00 AM',
-    avatar: require('./assets/avatar3.png'),
+    avatar: require('../assets/avatar3.png'),
   },
 ];
 
@@ -39,7 +39,6 @@ const GroupChatScreen = () => {
   );
 
   const sendMessage = () => {
-    // Send message logic here
     console.log(message);
     setMessage('');
   };
@@ -64,7 +63,7 @@ const GroupChatScreen = () => {
               onPress={sendMessage}
               accessoryLeft={(props) => (
                 <Image
-                  source={require('./assets/send.png')}
+                  source={require('../assets/send.png')}
                   style={{ width: 24, height: 24 }}
                 />
               )}
@@ -83,19 +82,13 @@ const styles = StyleSheet.create({
   },
   list: {
     flex: 1,
-    paddingHorizontal: 16,
-    paddingVertical: 8,
   },
   inputContainer: {
     flexDirection: 'row',
-    alignItems: 'center',
-    paddingHorizontal: 16,
-    paddingVertical: 8,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#212b44'
   },
   input: {
     flex: 1,
-    marginRight: 16,
   },
   sendButton: {
     paddingHorizontal: 0,

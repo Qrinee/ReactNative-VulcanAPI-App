@@ -5,6 +5,9 @@ import { EvaIconsPack } from '@ui-kitten/eva-icons';
 import { AppNavigator } from './navigation.component';
 import { ThemeContext } from './theme-context';
 import { View } from 'react-native';
+import { StatusBar } from 'expo-status-bar';
+import { AppProvider } from './components/AppContext';
+
 
 export default () => {
   const [theme, setTheme] = React.useState('dark');
@@ -16,6 +19,8 @@ export default () => {
 
   return (
     <>
+    <AppProvider>
+      <StatusBar style='light' />
       <React.Fragment>
         <IconRegistry icons={EvaIconsPack}/>
         <ThemeContext.Provider value={{theme, toggleTheme}}>
@@ -26,6 +31,7 @@ export default () => {
           </View>
         </ThemeContext.Provider>
       </React.Fragment>
+      </AppProvider>
     </>
   );
 };
