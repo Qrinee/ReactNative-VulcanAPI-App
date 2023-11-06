@@ -6,11 +6,11 @@
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "proxy": "http://localhost:5000",
-    "userInterfaceStyle": "light",
+    "userInterfaceStyle": "dark",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#202a44"
     },
     "assetBundlePatterns": [
       "**/*"

@@ -6,9 +6,12 @@ import { AppNavigator } from './navigation.component';
 import { ThemeContext } from './theme-context';
 import { View } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
-import { AppProvider } from './components/AppContext';
 
+import { BaseUrlProvider } from './components/BaseUrlContext';
+import { UserInfoProvider } from './components/UserInfoContext';
 
+import * as encoding from 'text-encoding';
+import { RefreshProvider } from './components/RefreshContext';
 export default () => {
   const [theme, setTheme] = React.useState('dark');
 
@@ -19,7 +22,10 @@ export default () => {
 
   return (
     <>
-    <AppProvider>
+    <RefreshProvider>
+    <UserInfoProvider>
+    <BaseUrlProvider>
+
       <StatusBar style='light' />
       <React.Fragment>
         <IconRegistry icons={EvaIconsPack}/>
@@ -31,7 +37,9 @@ export default () => {
           </View>
         </ThemeContext.Provider>
       </React.Fragment>
-      </AppProvider>
+      </BaseUrlProvider>
+      </UserInfoProvider>
+      </RefreshProvider>
     </>
   );
 };

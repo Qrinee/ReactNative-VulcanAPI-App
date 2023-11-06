@@ -1,14 +1,16 @@
 import { View } from 'react-native';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Text, Avatar, Button, Card, Input, Modal, Select, SelectItem } from '@ui-kitten/components'; // Importujemy Select i SelectItem
 import { StyleSheet } from 'react-native';
 import { SelectList } from 'react-native-dropdown-select-list'
+import { useRefreshContext } from './RefreshContext';
 const countries = ["Egypt", "Canada", "Australia", "Ireland"]
 
 export default function CreateHomeWork() {
 
-    const [selected, setSelected] = React.useState("");
-  
+    const [selected, setSelected] = useState("");
+    const [content, setContent] = useState()
+    const {refresh, setRefresh} = useRefreshContext()
     const data = [
         {key:'1', value:'Matematyka',},
         {key:'2', value:'Fizyka'},
@@ -43,6 +45,20 @@ export default function CreateHomeWork() {
   const onOptionSelect = (index) => {
     setSelectedOption(index); 
   };
+
+  const handleCreateHomework = () => {
+      fetch('http://146.59.44.77:8080/createHomework', {
+          method: 'POST',
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            homeworkLessonName: selected,
+            homeworkTopic: content,
+            homeworkDate: new Date().toLocaleDateString(),
+          })
+      }).then(() => {setRefresh(true)})
+  }
 
   return (
     <>
@@ -84,8 +100,9 @@ export default function CreateHomeWork() {
             placeholder="Wpisz treść zadania..."
             onFocus={handleInputFocus}
             onBlur={handleInputBlur}
+            onChange={(text) => setContent(text)}
           />
-          <Button style={{ marginTop: 30 }}>
+          <Button style={{ marginTop: 30 }} onPress={handleCreateHomework}>
             Zapisz
           </Button>
           <Button appearance='outline' style={{ marginTop: 5 }} onPress={() => {

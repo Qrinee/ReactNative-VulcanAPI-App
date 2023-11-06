@@ -1,26 +1,28 @@
 import { View } from 'react-native';
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Text, Avatar, Button, Card, Input, Modal, Select, SelectItem } from '@ui-kitten/components'; // Importujemy Select i SelectItem
 import { StyleSheet } from 'react-native';
 import { SelectList } from 'react-native-dropdown-select-list'
 import { Calendar } from 'react-native-calendars';
 import { ScrollView } from 'react-native';
 
-export default function CreateTest() {
+
+export default function CreateGrade({api}) {
 
     const [selected, setSelected] = React.useState("");
-    const [date, setDate] = useState(new Date())
-    const [date2, setDate2] = useState(new Date())
+
     const data = []
 
     useEffect(() => {
-
+        api.map((e, index) => {
+            data.push({
+                key: index,
+                value: e.subject
+            })
+        })
+        
     }, [data])
 
-    const type = [
-        {key:'1', value:'Sprawdzian'},
-        {key:'2', value:'Kartkówka'}
-    ]
   
   const [visible, setVisible] = useState(false);
   const [modalPosition, setModalPosition] = useState(0);
@@ -54,10 +56,7 @@ export default function CreateTest() {
            <ScrollView>
         <Card disabled={true}>
         
-          <Text category='h1' style={{ marginTop: 10, marginBottom: 10}}>Dodaj test</Text>
-          <Text appearance='hint' category='label' style={{marginBottom: 5}} >Wybierz date</Text>
-          <Calendar style={{backgroundColor: '#1b2036', color: 'white'}} date={date2} onDayPress={(e) => setDate(e)} />
-          <Text category='h5' style={{margin: 10}}>{date.dateString}</Text>
+          <Text category='h1' style={{ marginTop: 10, marginBottom: 10}}>Dodaj cel</Text>
           <Text appearance='hint' category='label' style={{marginBottom: 5}} >Przedmiot</Text>
 
 
@@ -82,36 +81,15 @@ export default function CreateTest() {
         save="value"
         />
 
-        <Text appearance='hint' category='label' style={{marginBottom: 5, marginTop: 10}} >Typ</Text>
-          <SelectList 
-          placeholder='Wybierz typ testu...'
-          boxStyles={{
-            borderColor: '#11192e',
-            backgroundColor: '#1b2036',
-            color: 'white',
-          }}
-          dropdownTextStyles={{
-            color: '#959fb7'
-          }}
-          inputStyles={{
-            color: 'white'
-          }}
-          disabledItemStyles={{
-            color: '#959fb7'
-          }}
-        setSelected={(val) => setSelected(val)} 
-        data={type} 
-        save="value"
-        />
 
           <Input
-            label="Temat testu"
+            label="Twój cel"
             style={{ marginTop: 10 }}
-            placeholder="Wpisz temat testu..."
+            placeholder="Wpisz cel np. 4.00"
             onFocus={handleInputFocus}
             onBlur={handleInputBlur}
           />
-          <Button style={{ marginTop: 30 }} appearance='ghost'>
+          <Button style={{ marginTop: 30 }} >
             Zapisz
           </Button>
           <Button appearance='outline' style={{ marginTop: 5 }} onPress={() => {
@@ -131,7 +109,7 @@ export default function CreateTest() {
           setVisible(true);
           handleInputBlur();
         }}>
-          + Dodaj test
+          + Dodaj cel
         </Button>
       </View>
     

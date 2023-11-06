@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { Layout, Text, Button } from '@ui-kitten/components';
 import { Grade } from './Grade';
 import { ScrollView, View } from 'react-native';
-import { useAppContext } from './AppContext';
+import { useBaseUrlContext } from './BaseUrlContext';
+import CreateGrade from './CreateGrade';
 
 export default function GradesScreen() {
-  const { isDemo, setIsDemo } = useAppContext();
+  const {url, setUrl} = useBaseUrlContext()
   const [data, setData] = useState({
     Biologia: ['4+'],
     Informatyka: ['5-', '5+'],
@@ -14,19 +15,19 @@ export default function GradesScreen() {
   const [transformedData, setTransformedData] = useState([]);
 
   useEffect(() => {
-    if (!isDemo) {
-      fetch('https://08b9-193-19-165-189.ngrok-free.app/getGrades')
-        .then((response) => response.json())
-        .then((fetchedData) => {
-          const transformedData = Object.keys(fetchedData).map((subject) => ({
-            subject,
-            grades: fetchedData[subject],
-          }));
-          setTransformedData(transformedData);
-        })
-        .catch((error) => console.error('Błąd podczas pobierania danych:', error));
-    }
-  }, [isDemo]);
+    // if (!isDemo) {
+    //   fetch(url + '/getGrades')
+    //     .then((response) => response.json())
+    //     .then((fetchedData) => {
+    //       const transformedData = Object.keys(fetchedData).map((subject) => ({
+    //         subject,
+    //         grades: fetchedData[subject],
+    //       }));
+    //       setTransformedData(transformedData);
+    //     })
+    //     .catch((error) => console.error('Błąd podczas pobierania danych:', error));
+    // }
+  }, []);
 
   return (
     <Layout style={{ backgroundColor: '#202129', flex: 1 }}>
@@ -37,9 +38,7 @@ export default function GradesScreen() {
         <Text appearance="hint" style={{ marginLeft: 20 }}>
           Dążenie do celów jest proste
         </Text>
-        <View style={{ margin: 20, fontSize: 10 }}>
-          <Button appearance="outline">+ Dodaj cel</Button>
-        </View>
+        <CreateGrade api={transformedData} />
         {transformedData.map((e) => (
           <Grade goal={0} lesson={e.subject} grades={e.grades} key={e.subject} />
         ))}

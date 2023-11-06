@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Image } from 'react-native';
 import { Text, Input, Button, Avatar, List, ListItem } from '@ui-kitten/components';
 
@@ -8,26 +8,15 @@ const data = [
     title: 'Artur N.',
     description: 'Ok',
     time: '10:30 AM',
-    avatar: require('../assets/avatar1.png'),
-  },
-  {
-    id: '2',
-    title: 'Wojtek K.',
-    description: 'Już dodałem',
-    time: '10:35 AM',
-    avatar: require('../assets/avatar2.png'),
-  },
-  {
-    id: '3',
-    title: 'Adam L.',
-    description: 'Dodaj wojtek zadanie z matmy',
-    time: '11:00 AM',
-    avatar: require('../assets/avatar3.png'),
+    avatar: require('../assets/user.png'),
   },
 ];
 
-const GroupChatScreen = () => {
-  const [message, setMessage] = React.useState('');
+const GroupChatScreen = ({ route }) => {
+  const token = route.params.id;
+  const [message, setMessage] = useState('');
+
+
 
   const renderItem = ({ item }) => (
     <ListItem
@@ -38,19 +27,9 @@ const GroupChatScreen = () => {
     />
   );
 
-  const sendMessage = () => {
-    console.log(message);
-    setMessage('');
-  };
-
   return (
     <View style={styles.container}>
-      <List
-        style={styles.list}
-        data={data}
-        renderItem={renderItem}
-        inverted
-      />
+      <List style={styles.list} data={data} renderItem={renderItem} inverted />
       <View style={styles.inputContainer}>
         <Input
           style={styles.input}
@@ -60,7 +39,6 @@ const GroupChatScreen = () => {
           accessoryRight={() => (
             <Button
               style={styles.sendButton}
-              onPress={sendMessage}
               accessoryLeft={(props) => (
                 <Image
                   source={require('../assets/send.png')}
@@ -85,7 +63,7 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     flexDirection: 'row',
-    backgroundColor: '#212b44'
+    backgroundColor: '#212b44',
   },
   input: {
     flex: 1,

@@ -2,15 +2,15 @@ import React, { createContext, useContext, useState } from 'react';
 
 const AppContext = createContext();
 
-export function useAppContext() {
+export function useBaseUrlContext() {
   return useContext(AppContext);
 }
 
-export function AppProvider({ children }) {
-  const [isDemo, setIsDemo] = useState(false);
+export function BaseUrlProvider({ children }) {
+  const [url, setUrl] = useState('http://146.59.44.77:5000');
 
   return (
-    <AppContext.Provider value={{ isDemo, setIsDemo }}>
+    <AppContext.Provider value={{ url, setUrl }}>
       {children}
     </AppContext.Provider>
   );
