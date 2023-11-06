@@ -4,6 +4,7 @@ import { Text, Avatar, Button, Card, Input, Modal, Select, SelectItem } from '@u
 import { StyleSheet } from 'react-native';
 import { SelectList } from 'react-native-dropdown-select-list'
 import { useRefreshContext } from './RefreshContext';
+import { useFormatDate } from './useFormatDate';
 const countries = ["Egypt", "Canada", "Australia", "Ireland"]
 
 export default function CreateHomeWork() {
@@ -33,6 +34,7 @@ export default function CreateHomeWork() {
   
   const [visible, setVisible] = useState(false);
   const [modalPosition, setModalPosition] = useState(0);
+  const {formatedDate} = useFormatDate(new Date())
 
   const handleInputFocus = () => {
     setModalPosition(-100);
@@ -55,9 +57,11 @@ export default function CreateHomeWork() {
           body: JSON.stringify({
             homeworkLessonName: selected,
             homeworkTopic: content,
-            homeworkDate: new Date().toLocaleDateString(),
+            homeworkDate: formatedDate
           })
-      }).then(() => {setRefresh(true)})
+      }).then(() => {
+        setVisible(false)
+        setRefresh(true)})
   }
 
   return (
@@ -100,7 +104,8 @@ export default function CreateHomeWork() {
             placeholder="Wpisz treść zadania..."
             onFocus={handleInputFocus}
             onBlur={handleInputBlur}
-            onChange={(text) => setContent(text)}
+            onChangeText={(text) => setContent(text)}
+            value={content}
           />
           <Button style={{ marginTop: 30 }} onPress={handleCreateHomework}>
             Zapisz

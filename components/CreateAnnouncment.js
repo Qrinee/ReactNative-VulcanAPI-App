@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { Text, Avatar, Button, ListItem, Card, Input, Modal } from '@ui-kitten/components';
 import { StyleSheet } from 'react-native';
 import { useRefreshContext } from './RefreshContext';
+import { useFormatDate } from './useFormatDate';
 
 export default function CreateAnnouncment({user}) {
   const [visible, setVisible] = useState(false);
@@ -12,19 +13,13 @@ export default function CreateAnnouncment({user}) {
   const handleInputFocus = () => setModalPosition(-100);
   const handleInputBlur = () => setModalPosition(0);
   const {refresh, setRefresh} = useRefreshContext()
+  const {formatedDate} = useFormatDate(new Date())
 
-  const formatDate = (date) => {
-    const day = String(date.getDate()).padStart(2, '0');
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const year = date.getFullYear();
-  
-    return `${year}-${month}-${day}`;
-  }
   const handleCreateAnnouncement = () => {
     const data = {
       announcementsTitle: title,
       announcementstContent: content,
-      announcementsDate: formatDate(new Date()),
+      announcementsDate: formatedDate,
       announcementsAuthor: user,
     };
   

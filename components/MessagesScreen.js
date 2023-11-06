@@ -97,7 +97,9 @@ export default function MessagesScreen({ navigation }) {
             ))
           )
         }
+        <Layout style={{margin: 20}}></Layout>
       </ScrollView>
+
     </Layout>
   );
 }

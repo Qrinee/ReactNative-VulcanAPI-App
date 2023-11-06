@@ -32,10 +32,10 @@ export default function HomeWorksScreen() {
           <Text appearance="hint" style={{marginLeft: 20}}>Brak zadań domowych 😎</Text>
         ):
         data.map(e => (
-          <HomeWork lesson={e.homeworkLessonName} desc={e.homeworkTopic} ID={e.id} key={e.id} date={e.date} />
+          <HomeWork lesson={e.homeworkLessonName} desc={e.homeworkTopic} ID={e.id} key={e.id} date={e.homeworkDate} />
         ))
       }
-      
+
     </Layout>
   );
 }

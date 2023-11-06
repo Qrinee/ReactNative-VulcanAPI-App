@@ -14,7 +14,7 @@ export default function CreateGroup() {
   const handleInputBlur = () => setModalPosition(0);
 
   const handleJoinChat = () => {
-
+    
   }
   const handleCreateChat = () => {
     fetch('http://146.59.44.77:8080/createGroup',{

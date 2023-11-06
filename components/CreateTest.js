@@ -5,17 +5,56 @@ import { StyleSheet } from 'react-native';
 import { SelectList } from 'react-native-dropdown-select-list'
 import { Calendar } from 'react-native-calendars';
 import { ScrollView } from 'react-native';
-
+import { useFormatDate } from './useFormatDate';
+import { useRefreshContext } from './RefreshContext';
+ 
 export default function CreateTest() {
 
     const [selected, setSelected] = React.useState("");
-    const [date, setDate] = useState(new Date())
+    const [examType, setExamType] = useState()
+    const [content, setContent] = useState()
+    const {formatedDate} = useFormatDate(new Date())
+    const [date, setDate] = useState(formatedDate)
     const [date2, setDate2] = useState(new Date())
-    const data = []
+    const {refresh, setRefresh} = useRefreshContext()
+    const data = [
+      {key:'1', value:'Matematyka',},
+      {key:'2', value:'Fizyka'},
+      {key:'3', value:'Biologia'},
+      {key:'4', value:'Chemia'},
+      {key:'5', value:'WF'},
+      {key:'6', value:'Język Angielski'},
+      {key:'7', value:'Język Polski'},
+      {key:'8', value:'Język Niemiecki'},
+      {key:'9', value:'Religia'},
+      {key:'10', value: 'Informatyka'},
+      {key: '11', value: 'Pracowania AD'},
+      {key: '12', value: 'Pracowania SIAI'},
+      {key: '13', value: 'Podstawy Przedsiębiorczości'},
+      {key: '14', value: 'Historia'},
+      {key: '15', value: 'Pracowania Baz Danych'},
+      {key: '16', value: 'Pracowania Aplikacji'},
+      {key: '17', value: 'Geografia'},
+  ]
 
-    useEffect(() => {
+    const handleCreateTest = () => {
 
-    }, [data])
+      fetch('http://146.59.44.77:8080/createExam', {
+          method: 'POST',
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            lessonName: selected,
+            examTopic: content,
+            examDate: date,
+            examType: examType
+          })
+      }).then(() => {
+        setVisible(false)
+        setRefresh(true)})
+    }
+
 
     const type = [
         {key:'1', value:'Sprawdzian'},
@@ -56,8 +95,10 @@ export default function CreateTest() {
         
           <Text category='h1' style={{ marginTop: 10, marginBottom: 10}}>Dodaj test</Text>
           <Text appearance='hint' category='label' style={{marginBottom: 5}} >Wybierz date</Text>
-          <Calendar style={{backgroundColor: '#1b2036', color: 'white'}} date={date2} onDayPress={(e) => setDate(e)} />
-          <Text category='h5' style={{margin: 10}}>{date.dateString}</Text>
+          <Calendar style={{backgroundColor: '#1b2036', color: 'white'}} date={date2} onDayPress={(e) => {
+            setDate(e.dateString)
+            }} />
+          <Text category='h5' style={{margin: 10}}>{date}</Text>
           <Text appearance='hint' category='label' style={{marginBottom: 5}} >Przedmiot</Text>
 
 
@@ -99,7 +140,7 @@ export default function CreateTest() {
           disabledItemStyles={{
             color: '#959fb7'
           }}
-        setSelected={(val) => setSelected(val)} 
+        setSelected={(val) => setExamType(val)} 
         data={type} 
         save="value"
         />
@@ -109,9 +150,11 @@ export default function CreateTest() {
             style={{ marginTop: 10 }}
             placeholder="Wpisz temat testu..."
             onFocus={handleInputFocus}
+            value={content}
+            onChangeText={(text) => setContent(text)}
             onBlur={handleInputBlur}
           />
-          <Button style={{ marginTop: 30 }} appearance='ghost'>
+          <Button style={{ marginTop: 30 }} appearance='ghost' onPress={handleCreateTest}>
             Zapisz
           </Button>
           <Button appearance='outline' style={{ marginTop: 5 }} onPress={() => {

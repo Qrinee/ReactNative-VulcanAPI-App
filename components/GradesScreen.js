@@ -15,18 +15,7 @@ export default function GradesScreen() {
   const [transformedData, setTransformedData] = useState([]);
 
   useEffect(() => {
-    // if (!isDemo) {
-    //   fetch(url + '/getGrades')
-    //     .then((response) => response.json())
-    //     .then((fetchedData) => {
-    //       const transformedData = Object.keys(fetchedData).map((subject) => ({
-    //         subject,
-    //         grades: fetchedData[subject],
-    //       }));
-    //       setTransformedData(transformedData);
-    //     })
-    //     .catch((error) => console.error('Błąd podczas pobierania danych:', error));
-    // }
+
   }, []);
 
   return (

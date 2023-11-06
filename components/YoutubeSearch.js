@@ -14,7 +14,7 @@ const YouTubeSearch = ({ examData }) => {
     const allResults = [];
 
     for (const item of examData) {
-      const searchQuery = item.Topic;
+      const searchQuery = item.examTopic;
 
       try {
         const response = await fetch(
@@ -53,7 +53,7 @@ const YouTubeSearch = ({ examData }) => {
       {groupedResults.map((examResults, index) => (
         <React.Fragment key={index}>
           <Text category='h5' style={{ marginLeft: 20, marginTop: 50, marginBottom: 20 }}>
-            Wyniki dla testu: {examData[index].LessonName}
+            Wyniki dla testu: {examData[index].lessonName}
           </Text>
           <List
             data={examResults}

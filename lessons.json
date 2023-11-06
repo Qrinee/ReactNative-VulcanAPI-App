@@ -1,0 +1,19 @@
+[
+    {"key": "1", "value": "Matematyka"},
+    {"key": "2", "value": "Fizyka"},
+    {"key": "3", "value": "Biologia"},
+    {"key": "4", "value": "Chemia"},
+    {"key": "5", "value": "WF"},
+    {"key": "6", "value": "Język Angielski"},
+    {"key": "7", "value": "Język Polski"},
+    {"key": "8", "value": "Język Niemiecki"},
+    {"key": "9", "value": "Religia"},
+    {"key": "10", "value": "Informatyka"},
+    {"key": "11", "value": "Pracowania AD"},
+    {"key": "12", "value": "Pracowania SIAI"},
+    {"key": "13", "value": "Podstawy Przedsiębiorczości"},
+    {"key": "14", "value": "Historia"},
+    {"key": "15", "value": "Pracowania Baz Danych"},
+    {"key": "16", "value": "Pracowania Aplikacji"},
+    {"key": "17", "value": "Geografia"}
+]

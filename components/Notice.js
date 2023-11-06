@@ -10,7 +10,7 @@ export default function Notice({title, date, desc, author}) {
       </View>
       }>
           <Text>{desc}</Text>
-          <Button status='danger' appearance='ghost' style={{marginTop: 10}}>Usuń</Button>
+          {/* <Button status='danger' appearance='ghost' style={{marginTop: 10}}>Usuń</Button> */}
     </Card>
   )
 }
