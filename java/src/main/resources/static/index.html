@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hello WebSocket</title>
+ 
+    <link href="/main.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@stomp/stompjs@7.0.0/bundles/stomp.umd.min.js"></script>
+    <script src="/app.js"></script>
+</head>
+<body>
+<form>
+  <label for="fname">Pokoj:</label><br>
+  <input type="text" id="fname" name="fname" value="Pokoj"><br><br>
+  <input onclick="connect()" type="button" value="poloncz">
+</form> 
+<br>
+<br>
+<p>Rozlacz sie </p>
+<button onclick="disconnect()">rozloncz</button>
+<form>
+<label for="fname">Imie</label><br>
+  <input type="text" id="Imie"  value="Imie"><br><br>
+  <label for="fname">Wiadomosc</label><br>
+  <input type="text" id="Wiadomosc"  value="Wiadomosc"><br><br>
+  <input onclick="sendName()" type="button" value="poloncz">
+</form>
+
+
+</body>
+</html>
