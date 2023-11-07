@@ -6,7 +6,7 @@ import { AppNavigator } from './navigation.component';
 import { ThemeContext } from './theme-context';
 import { View } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
-
+import 'react-native-gesture-handler';
 import { BaseUrlProvider } from './components/BaseUrlContext';
 import { UserInfoProvider } from './components/UserInfoContext';
 import * as encoding from 'text-encoding';

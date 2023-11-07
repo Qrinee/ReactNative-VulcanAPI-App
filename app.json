@@ -1,10 +1,10 @@
 {
   "expo": {
-    "name": "app",
+    "name": "Klasowa",
     "slug": "app",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/user.png",
     "proxy": "http://localhost:5000",
     "userInterfaceStyle": "dark",
     "splash": {
@@ -19,9 +19,10 @@
       "supportsTablet": true
     },
     "android": {
+      "usesCleartextTraffic": true,
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "foregroundImage": "./assets/user.png",
+        "backgroundColor": "#1f2938"
       },
       "package": "com.qrin.app"
     },
@@ -32,6 +33,22 @@
       "eas": {
         "projectId": "91ca0d7f-05ee-4937-9f0e-474f31533266"
       }
-    }
+    },
+    "plugins": [
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "compileSdkVersion": 31,
+            "targetSdkVersion": 31,
+            "buildToolsVersion": "31.0.0",
+            "usesCleartextTraffic": true
+          },
+          "ios": {
+            "deploymentTarget": "13.0"
+          }
+        }
+      ]
+    ]
   }
 }
