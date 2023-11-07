@@ -1,35 +1,104 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, Image } from 'react-native';
+import { StyleSheet, View, Image, ScrollView } from 'react-native';
 import { Text, Input, Button, Avatar, List, ListItem } from '@ui-kitten/components';
 
-const data = [
-  {
-    id: '1',
-    title: 'Artur N.',
-    description: 'Ok',
-    time: '10:30 AM',
-    avatar: require('../assets/user.png'),
-  },
-];
+import { Client, Message } from '@stomp/stompjs';
+import {avata} from '../assets/user.png'
+import { useUserInfoContext } from './UserInfoContext';
 
 const GroupChatScreen = ({ route }) => {
+
+  const [mappedData, setMappedData] = useState([])
+  const {userInfo, setUserInfo} = useUserInfoContext()
+  const [data, setData] = useState([])
+  const stompClient = new Client()
+
+  stompClient.configure({
+    connectHeaders: {},
+    brokerURL: "ws://146.59.44.77:8080/chatKlasowaWebsocket",
+    debug: function (str) {
+        console.log('STOMP: ' + str);
+    },
+    reconnectDelay: 200,
+    onConnect: function (frame) {
+      stompClient.subscribe('/chat/messages/' + 'Pokoj', (message) => {
+        console.log(message.body.content)
+      })
+        stompClient.subscribe("/klasowaws/chat/messages/" + 'Pokoj',  (message) => {
+            setData(JSON.parse(message.body))
+        });
+
+
+    },
+    onStompError: (frame) => {
+        console.log('Additional details: ' + frame.body);
+    },
+    forceBinaryWSFrames: true,
+    appendMissingNULLonIncoming: true,
+  })
+
+  clickhandler =  () => {
+
+  //   const date = new Date();
+  
+  //   try {
+  //     await new Promise((resolve) => {
+  //       if (stompClient.connected) {
+  //         resolve();
+  //       } else {
+  //         stompClient.onConnect = () => {
+  //           resolve();
+  //         };
+  //         stompClient.activate();
+  //       }
+  //     });
+  
+  //     stompClient.publish({
+  //       destination: '/klasowaws/Message/' + 'Pokoj',
+  //       body: JSON.stringify({
+  //         chatName: 'Pokoj',
+  //         fromUser: userInfo.username,
+  //         messageDate: date.toString(),
+  //         messageContent: message,
+  //       }),
+  //     });
+  //     setMessage('')
+  //   } catch (error) {
+  //     console.error('Błąd asynchronicznej operacji:', error);
+  //   }
+
+  //   stompClient.subscribe("/klasowaws/chat/messages/" + 'Pokoj',  (message) => {
+  //     setData(JSON.parse(message.body))
+  // });
+  };
+
   const token = route.params.id;
   const [message, setMessage] = useState('');
 
+    useEffect(() => {
+        stompClient.activate()
+        console.log(userInfo)
+    }, []);
 
-
-  const renderItem = ({ item }) => (
-    <ListItem
-      title={item.title}
-      description={item.description}
-      accessoryLeft={() => <Avatar source={item.avatar} />}
-      accessoryRight={() => <Text>{item.time}</Text>}
-    />
-  );
 
   return (
     <View style={styles.container}>
-      <List style={styles.list} data={data} renderItem={renderItem} inverted />
+
+      <View style={styles.list}>
+        <ScrollView>
+      {
+        data.map(e => (
+          <ListItem
+          title={e.FromUser}
+          description={e.MessageContent}
+          accessoryLeft={() => <Avatar source={require('../assets/user.png')} />}
+          accessoryRight={() => <Text>{new Date(e.MessageDate).toLocaleTimeString()}</Text>}
+          key={e.id}
+            />
+        ))
+      }
+      </ScrollView>
+      </View>
       <View style={styles.inputContainer}>
         <Input
           style={styles.input}
@@ -39,6 +108,7 @@ const GroupChatScreen = ({ route }) => {
           accessoryRight={() => (
             <Button
               style={styles.sendButton}
+              onPress={clickhandler}
               accessoryLeft={(props) => (
                 <Image
                   source={require('../assets/send.png')}
@@ -60,6 +130,7 @@ const styles = StyleSheet.create({
   },
   list: {
     flex: 1,
+    backgroundColor: '#212b44'
   },
   inputContainer: {
     flexDirection: 'row',

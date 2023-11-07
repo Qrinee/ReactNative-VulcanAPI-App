@@ -12,7 +12,7 @@ export default function HomeWorksScreen() {
   useEffect(() => {
     fetch('http://146.59.44.77:8080/getAllCustomHomeworks')
     .then(e => e.json())
-    .then(e => setData(e))
+    .then(e => setData(e.reverse()))
     .then(() => setRefresh(false))
   }, [refresh]);
 

@@ -9,7 +9,6 @@ import { StatusBar } from 'expo-status-bar';
 
 import { BaseUrlProvider } from './components/BaseUrlContext';
 import { UserInfoProvider } from './components/UserInfoContext';
-
 import * as encoding from 'text-encoding';
 import { RefreshProvider } from './components/RefreshContext';
 export default () => {
@@ -22,6 +21,7 @@ export default () => {
 
   return (
     <>
+
     <RefreshProvider>
     <UserInfoProvider>
     <BaseUrlProvider>

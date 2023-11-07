@@ -5,29 +5,67 @@ import { StyleSheet } from 'react-native';
 import { SelectList } from 'react-native-dropdown-select-list'
 import { Calendar } from 'react-native-calendars';
 import { ScrollView } from 'react-native';
+import { useUserInfoContext } from './UserInfoContext';
+import { useRefreshContext } from './RefreshContext';
 
 
-export default function CreateGrade({api}) {
+export default function CreateGrade({targets}) {
 
     const [selected, setSelected] = React.useState("");
 
-    const data = []
+    const data = [
+      {key:'1', value:'Matematyka',},
+      {key:'2', value:'Fizyka'},
+      {key:'3', value:'Biologia'},
+      {key:'4', value:'Chemia'},
+      {key:'5', value:'WF'},
+      {key:'6', value:'Język Angielski'},
+      {key:'7', value:'Język Polski'},
+      {key:'8', value:'Język Niemiecki'},
+      {key:'9', value:'Religia'},
+      {key:'10', value: 'Informatyka'},
+      {key: '11', value: 'Pracowania AD'},
+      {key: '12', value: 'Pracowania SIAI'},
+      {key: '13', value: 'Podstawy Przedsiębiorczości'},
+      {key: '14', value: 'Historia'},
+      {key: '15', value: 'Pracowania Baz Danych'},
+      {key: '16', value: 'Pracowania Aplikacji'},
+      {key: '17', value: 'Geografia'},
+  ]
 
     useEffect(() => {
-        api.map((e, index) => {
-            data.push({
-                key: index,
-                value: e.subject
-            })
-        })
-        
+
     }, [data])
 
   
   const [visible, setVisible] = useState(false);
   const [modalPosition, setModalPosition] = useState(0);
-
-
+  const [target, setTarget] = useState('')
+  const {userInfo, setUserInfo} = useUserInfoContext()
+  const {refresh, setRefresh} = useRefreshContext()
+  const [info, setInfo] = useState('')
+  const handleCreateTarget = () => {
+    console.log(targets);
+    if (!targets.find(target => target.subjectName === selected)) {
+      fetch('http://146.59.44.77:8080/createTarget', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          subjectName: selected,
+          userid: userInfo.username,
+          gradetarget: parseFloat(target),
+        }),
+      })
+        .then(() => {
+          setVisible(false);
+          setRefresh(true);
+        });
+    } else {
+      setInfo('Nie możesz do tego samego przedmiotu dodać celu');
+    }
+  };
   const handleInputFocus = () => {
     setModalPosition(-100);
   };
@@ -39,6 +77,7 @@ export default function CreateGrade({api}) {
   const onOptionSelect = (index) => {
     setSelectedOption(index); 
   };
+
 
   return (
     <>
@@ -57,6 +96,7 @@ export default function CreateGrade({api}) {
         <Card disabled={true}>
         
           <Text category='h1' style={{ marginTop: 10, marginBottom: 10}}>Dodaj cel</Text>
+          <Text status='danger'>{info}</Text>
           <Text appearance='hint' category='label' style={{marginBottom: 5}} >Przedmiot</Text>
 
 
@@ -77,6 +117,7 @@ export default function CreateGrade({api}) {
             color: '#959fb7'
           }}
         setSelected={(val) => setSelected(val)} 
+        value={target}
         data={data} 
         save="value"
         />
@@ -88,8 +129,9 @@ export default function CreateGrade({api}) {
             placeholder="Wpisz cel np. 4.00"
             onFocus={handleInputFocus}
             onBlur={handleInputBlur}
+            onChangeText={text => setTarget(text)}
           />
-          <Button style={{ marginTop: 30 }} >
+          <Button style={{ marginTop: 30 }} onPress={handleCreateTarget}>
             Zapisz
           </Button>
           <Button appearance='outline' style={{ marginTop: 5 }} onPress={() => {

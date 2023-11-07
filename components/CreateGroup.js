@@ -4,7 +4,7 @@ import { Text, Avatar, Button, ListItem, Card, Input, Modal } from '@ui-kitten/c
 import { StyleSheet } from 'react-native';
 import { useRefreshContext } from './RefreshContext';
 
-export default function CreateGroup() {
+export default function CreateGroup({numberOfGroups}) {
   const [visible, setVisible] = useState(false);
   const [modal, setModal] = useState(false)
   const [modalPosition, setModalPosition] = useState(0);
@@ -12,27 +12,28 @@ export default function CreateGroup() {
   const {refresh, setRefresh} = useRefreshContext()
   const handleInputFocus = () => setModalPosition(-100);
   const handleInputBlur = () => setModalPosition(0);
-
+  const [info, setInfo] = useState('')
   const handleJoinChat = () => {
     
   }
   const handleCreateChat = () => {
-    fetch('http://146.59.44.77:8080/createGroup',{
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        groupName: groupName,
-        groupToken: "xx"
+    numberOfGroups > 1 ? setInfo('Możesz być tylko w jednej grupie') :
+      fetch('http://146.59.44.77:8080/createGroup',{
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          groupName: groupName,
+          groupToken: "xx"
+        })
+      }).then(e => {
+        setRefresh(true)
+        if(!e.ok) throw new Error(e.status)
+        console.log(e.ok)
+      }).then(() => {
+        setVisible(false)
       })
-    }).then(e => {
-      setRefresh(true)
-      if(!e.ok) throw new Error(e.status)
-      console.log(e.ok)
-    }).then(() => {
-      setVisible(false)
-    })
   }
   return (
     <>
@@ -47,6 +48,7 @@ export default function CreateGroup() {
       >        
         <Card disabled={true}>
           <Text category='h1' style={{ marginTop: 10 }}>Utwórz grupę</Text>
+          <Text>{info}</Text>
           <Input
             label="Nazwa grupy"
             style={{ marginTop: 10 }}

@@ -19,7 +19,6 @@ export default function ChatsScreen({ navigation }) {
     }, [])
   return (
     <Layout style={{ flex: 1, padding: 10}}>
-        
         {
             chats.length > 0 ? (
             chats.map(e => (
@@ -27,6 +26,7 @@ export default function ChatsScreen({ navigation }) {
             ))
             ) : <Text>{"Tu nic nie ma"}</Text>
         }
+        <Text appearance='hint' style={{margin: 10}}>Przed kartkówką/sprawdzianem utworzy się w tym miejscu nowy chat do nauki</Text>
     </Layout>
   );
 }

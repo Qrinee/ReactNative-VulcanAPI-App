@@ -11,11 +11,15 @@ export default function Chat({ title, navigation, ID, date }) {
     );
 
     return (
+        <>
+
         <ListItem
             title={title}
             description={date}
             accessoryLeft={ItemImage}
             onPress={() => navigation.navigate("Wiadomości", {id: ID})}
         />
+  
+        </>
     );
 }

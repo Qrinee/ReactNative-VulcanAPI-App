@@ -10,7 +10,7 @@ import { useRefreshContext } from './RefreshContext';
 
 export default function MessagesScreen({ navigation }) {
   const [day, setDay] = useState(new Date());
-  const {user, setUser} = useUserInfoContext()
+  const {userInfo, setUserInfo} = useUserInfoContext()
   const [chats, setChats] = useState([])
   const [announcements, setAnnouncements] = useState([])
   const [userData, setUserData] = useState('')
@@ -22,6 +22,7 @@ export default function MessagesScreen({ navigation }) {
       .then(e => {
         console.log('Pomyślnie pobrano dane z demoLogin:', e);
         setUserData(e.username);
+        setUserInfo(e)
       })
       .then(() => {
         console.log('Rozpoczęto pobieranie danych z getAllGroups');
@@ -61,14 +62,14 @@ export default function MessagesScreen({ navigation }) {
         <Text appearance='hint' style={{ marginLeft: 20 }}>
           Dzisiaj jest dzień: {day.toLocaleDateString()}
         </Text>
-        <CreateGroup />
+        <CreateGroup numberOfGroups={chats.length} />
         <Text category='h5' style={{ marginLeft: 20, marginBottom: 10 }}>
           Moje grupy:
         </Text>
         <Divider />
         {
           chats.length === 0 ? (
-            <Text appearance="hint" style={{marginLeft: 20}}>Brak dostępnych chatów.</Text>
+            <Text appearance="hint" style={{marginLeft: 20}}>Brak dostępnych grup.</Text>
           ): (
           chats.map(e => (
             <Class

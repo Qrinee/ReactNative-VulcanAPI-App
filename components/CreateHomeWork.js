@@ -2,39 +2,38 @@ import { View } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { Text, Avatar, Button, Card, Input, Modal, Select, SelectItem } from '@ui-kitten/components'; // Importujemy Select i SelectItem
 import { StyleSheet } from 'react-native';
-import { SelectList } from 'react-native-dropdown-select-list'
+import { SelectList } from 'react-native-dropdown-select-list';
 import { useRefreshContext } from './RefreshContext';
 import { useFormatDate } from './useFormatDate';
 const countries = ["Egypt", "Canada", "Australia", "Ireland"]
 
 export default function CreateHomeWork() {
+  const [selected, setSelected] = useState("");
+  const [content, setContent] = useState();
+  const { refresh, setRefresh } = useRefreshContext();
+  const data = [
+    { key: '1', value: 'Matematyka' },
+    { key: '2', value: 'Fizyka' },
+    { key: '3', value: 'Biologia' },
+    { key: '4', value: 'Chemia' },
+    { key: '5', value: 'WF' },
+    { key: '6', value: 'Język Angielski' },
+    { key: '7', value: 'Język Polski' },
+    { key: '8', value: 'Język Niemiecki' },
+    { key: '9', value: 'Religia' },
+    { key: '10', value: 'Informatyka' },
+    { key: '11', value: 'Pracowania AD' },
+    { key: '12', value: 'Pracowania SIAI' },
+    { key: '13', value: 'Podstawy Przedsiębiorczości' },
+    { key: '14', value: 'Historia' },
+    { key: '15', value: 'Pracowania Baz Danych' },
+    { key: '16', value: 'Pracowania Aplikacji' },
+    { key: '17', value: 'Geografia' },
+  ];
 
-    const [selected, setSelected] = useState("");
-    const [content, setContent] = useState()
-    const {refresh, setRefresh} = useRefreshContext()
-    const data = [
-        {key:'1', value:'Matematyka',},
-        {key:'2', value:'Fizyka'},
-        {key:'3', value:'Biologia'},
-        {key:'4', value:'Chemia'},
-        {key:'5', value:'WF'},
-        {key:'6', value:'Język Angielski'},
-        {key:'7', value:'Język Polski'},
-        {key:'8', value:'Język Niemiecki'},
-        {key:'9', value:'Religia'},
-        {key:'10', value: 'Informatyka'},
-        {key: '11', value: 'Pracowania AD'},
-        {key: '12', value: 'Pracowania SIAI'},
-        {key: '13', value: 'Podstawy Przedsiębiorczości'},
-        {key: '14', value: 'Historia'},
-        {key: '15', value: 'Pracowania Baz Danych'},
-        {key: '16', value: 'Pracowania Aplikacji'},
-        {key: '17', value: 'Geografia'},
-    ]
-  
   const [visible, setVisible] = useState(false);
   const [modalPosition, setModalPosition] = useState(0);
-  const {formatedDate} = useFormatDate(new Date())
+  const { formatedDate } = useFormatDate(new Date());
 
   const handleInputFocus = () => {
     setModalPosition(-100);
@@ -45,24 +44,38 @@ export default function CreateHomeWork() {
   };
 
   const onOptionSelect = (index) => {
-    setSelectedOption(index); 
+    setSelectedOption(index);
   };
 
   const handleCreateHomework = () => {
-      fetch('http://146.59.44.77:8080/createHomework', {
+    fetch('http://146.59.44.77:8080/createHomework', {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        homeworkLessonName: selected,
+        homeworkTopic: content,
+        homeworkDate: formatedDate,
+      }),
+    })
+      .then(
+        fetch('http://146.59.44.77:8080/createChat', {
           method: 'POST',
           headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            homeworkLessonName: selected,
-            homeworkTopic: content,
-            homeworkDate: formatedDate
-          })
-      }).then(() => {
-        setVisible(false)
-        setRefresh(true)})
-  }
+            chatName: selected + " " + content,
+            chatDate: new Date().toLocaleDateString(),
+          }),
+        })
+      )
+      .then(() => {
+        setVisible(false);
+        setRefresh(true);
+      });
+  };
 
   return (
     <>
@@ -76,27 +89,35 @@ export default function CreateHomeWork() {
         style={{ width: '90%', marginTop: modalPosition }}
       >
         <Card disabled={true}>
-          <Text category='h1' style={{ marginTop: 10, marginBottom: 10}}>Dodaj zadanie</Text>
-          <Text appearance='hint' category='label' style={{marginBottom: 5}} >Przedmiot</Text>
-          <SelectList 
-              placeholder='Wybierz przedmiot...'
-              boxStyles={{
-                borderColor: '#11192e',
-                backgroundColor: '#1b2036',
-                color: 'white', 
-              }}
-              dropdownTextStyles={{
-                color: '#959fb7'
-              }}
-              inputStyles={{
-                color: 'white'
-              }}
-              disabledItemStyles={{
-                color: '#959fb7'
-              }}
-              setSelected={(val) => setSelected(val)} 
-              data={data} 
-              save="value"
+          <Text category='h1' style={{ marginTop: 10, marginBottom: 10 }}>
+            Dodaj zadanie
+          </Text>
+          <Text
+            appearance='hint'
+            category='label'
+            style={{ marginBottom: 5 }}
+          >
+            Przedmiot
+          </Text>
+          <SelectList
+            placeholder='Wybierz przedmiot...'
+            boxStyles={{
+              borderColor: '#11192e',
+              backgroundColor: '#1b2036',
+              color: 'white',
+            }}
+            dropdownTextStyles={{
+              color: '#959fb7',
+            }}
+            inputStyles={{
+              color: 'white',
+            }}
+            disabledItemStyles={{
+              color: '#959fb7',
+            }}
+            setSelected={(val) => setSelected(val)}
+            data={data}
+            save="value"
           />
           <Input
             label="Treść zadania"
@@ -110,20 +131,27 @@ export default function CreateHomeWork() {
           <Button style={{ marginTop: 30 }} onPress={handleCreateHomework}>
             Zapisz
           </Button>
-          <Button appearance='outline' style={{ marginTop: 5 }} onPress={() => {
-            setVisible(false);
-            handleInputBlur();
-          }}>
+          <Button
+            appearance='outline'
+            style={{ marginTop: 5 }}
+            onPress={() => {
+              setVisible(false);
+              handleInputBlur();
+            }}
+          >
             Anuluj
           </Button>
         </Card>
       </Modal>
 
       <View style={{ margin: 20, fontSize: 10 }}>
-        <Button appearance='outline' onPress={() => {
-          setVisible(true);
-          handleInputBlur();
-        }}>
+        <Button
+          appearance='outline'
+          onPress={() => {
+            setVisible(true);
+            handleInputBlur();
+          }}
+        >
           + Dodaj zadanie
         </Button>
       </View>
@@ -142,4 +170,3 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
 });
-

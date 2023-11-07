@@ -6,13 +6,6 @@ import * as ClipBoard from 'expo-clipboard'
 
 export default function Test({ lesson, desc, date }) {
 
-  const InstallButton = ({ onPress }) => (
-        <>
-            <Button size='tiny' onPress={onPress} status='danger' appearance='ghost'>
-                USUŃ
-            </Button>
-        </>
-  );
 
   const ItemImage = (props) => (
     <Avatar
@@ -28,7 +21,6 @@ export default function Test({ lesson, desc, date }) {
         title={lesson + " | " + date}
         description={desc}
         accessoryLeft={ItemImage}
-        accessoryRight={<InstallButton  />}
         style={{marginTop: 5}}
       />
     </>

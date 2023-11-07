@@ -50,9 +50,20 @@ export default function CreateTest() {
             examDate: date,
             examType: examType
           })
-      }).then(() => {
-        setVisible(false)
-        setRefresh(true)})
+      })
+        .then(fetch('http://146.59.44.77:8080/createChat', {
+          method: 'POST',
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            chatName: selected + " " + examType,
+            chatDate: new Date().toLocaleDateString()
+          })
+        }))
+        .then(() => {
+          setVisible(false)
+          setRefresh(true)})
     }
 
 
