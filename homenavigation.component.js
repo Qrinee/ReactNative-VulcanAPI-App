@@ -9,11 +9,11 @@ import ZadaniaIcon from './assets/icons8-homework-64.png';
 import TestyIcon from './assets/icons8-test-100.png';
 import SredniaIcon from './assets/icons8-trophy-90.png';
 
-import GradesScreen from './components/GradesScreen';
-import HomesWorksScreen from './components/HomeWorksScreen';
-import MessagesScreen from './components/MessagesScreen';
-import TestsScreen from './components/TestsScreen';
-import GroupChatScreen from './components/GroupChatScreen';
+import GradesScreen from './screens/(logged-in)/GradesScreen';
+import HomesWorksScreen from './screens/(logged-in)/HomeWorksScreen';
+import MessagesScreen from './screens/(logged-in)/MessagesScreen';
+import TestsScreen from './screens/(logged-in)/TestsScreen';
+import GroupChatScreen from './screens/(logged-in)/GroupChatScreen';
 
 const { Navigator: TabNavigator, Screen: TabScreen } = createBottomTabNavigator();
 

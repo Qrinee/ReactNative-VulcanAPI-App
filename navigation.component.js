@@ -1,21 +1,13 @@
-import {React, useEffect} from 'react';
+import {React} from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-
 import { createStackNavigator } from '@react-navigation/stack';
-import { Image } from 'react-native';
-import MessagesScreen from './components/MessagesScreen';
-import GroupChatScreen from './components/GroupChatScreen';
+import GroupChatScreen from './screens/(logged-in)/GroupChatScreen';
 import home from './homenavigation.component';
-import LoginScreen from './components/LoginScreen';
-import { useState } from 'react/cjs/react.production.min';
-import CheckerScreen from './components/CheckerScreen';
-import ChatsScreen from './components/ChatsScreen';
-import Chat from './components/Chat';
-
+import LoginScreen from './screens/LoginScreen';
+import CheckerScreen from './screens/CheckerScreen';
+import ChatsScreen from './screens/(logged-in)/ChatsScreen';
 
 const Stack = createStackNavigator()
-
-
 
 export const AppNavigator = () => {
   return(

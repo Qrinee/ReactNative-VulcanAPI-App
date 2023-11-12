@@ -7,10 +7,10 @@ import { ThemeContext } from './theme-context';
 import { View } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import 'react-native-gesture-handler';
-import { BaseUrlProvider } from './components/BaseUrlContext';
-import { UserInfoProvider } from './components/UserInfoContext';
+import { BaseUrlProvider } from './services/BaseUrlContext';
+import { UserInfoProvider } from './services/UserInfoContext';
 import * as encoding from 'text-encoding';
-import { RefreshProvider } from './components/RefreshContext';
+import { RefreshProvider } from './services/RefreshContext';
 export default () => {
   const [theme, setTheme] = React.useState('dark');
 

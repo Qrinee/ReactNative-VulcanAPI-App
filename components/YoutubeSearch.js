@@ -24,7 +24,7 @@ const YouTubeSearch = ({ examData }) => {
         const data = await response.json();
 
         if (data.items) {
-          const limitedResults = data.items.slice(0, 3); // Ogranicz wyniki do 3 filmów
+          const limitedResults = data.items.slice(0, 3);
           allResults.push(...limitedResults);
         }
       } catch (error) {
